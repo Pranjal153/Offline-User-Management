@@ -6,11 +6,13 @@ import {
   Pressable,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from 'react-native';
 import styles from './styles';
 import { useAppDispatch } from '../../store/hooks';
 import { addUser, loadUsers, updateUser } from '../../store/users/userThunks';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { isValidEmail, isValidName } from '../../utils/validation';
 
 type Role = 'admin' | 'manager';
 
@@ -27,11 +29,34 @@ const AddUserScreen = () => {
   const [email, setEmail] = useState('');
 
   const handleCreateUser = async () => {
+    const fullName = `${firstName} ${lastName}`.trim();
+
+    if (!firstName || !lastName) {
+      Alert.alert('Error', 'Name should not be empty.');
+      return;
+    }
+    if (!isValidName(firstName) || !isValidName(lastName)) {
+      Alert.alert('Error', 'Name can contain only alphabets and spaces.');
+      return;
+    }
+
+    if (fullName.length > 50) {
+      Alert.alert('Error', 'Name must not exceed 50 characters.');
+      return;
+    }
+    if (!email) {
+      Alert.alert('Error', 'Please enter a email address.');
+      return;
+    }
+    if (email && !isValidEmail(email)) {
+      Alert.alert('Error', 'Please enter a valid email address.');
+      return;
+    }
     const payload = {
       id: isEdit ? existingUser.id : Date.now().toString(),
       name: `${firstName.trim()} ${lastName.trim()}`,
       email: email.trim() || undefined,
-      role,
+      role: role.toUpperCase(),
     };
 
     if (isEdit) {
