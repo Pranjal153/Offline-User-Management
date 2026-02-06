@@ -77,6 +77,7 @@ const UserListScreen = () => {
         <View style={styles.tabContainer}>
           {TABS.map(tab => (
             <Pressable
+              testID={`tab-${tab}`}
               key={tab}
               onPress={() => setActiveTab(tab)}
               style={[styles.tabWrapper, activeTab === tab && styles.tabActive]}
@@ -129,10 +130,16 @@ const UserListScreen = () => {
                   )}
                 </View>
                 <View style={styles.row1}>
-                  <Pressable onPress={() => handleEdit(user)}>
+                  <Pressable
+                    onPress={() => handleEdit(user)}
+                    testID={`edit-${user.id}`}
+                  >
                     <Text style={styles.editText}>Edit</Text>
                   </Pressable>
-                  <Pressable onPress={() => handleDelete(user.id)}>
+                  <Pressable
+                    onPress={() => handleDelete(user.id)}
+                    testID={`delete-${user.id}`}
+                  >
                     <Text style={styles.deleteText}>Delete</Text>
                   </Pressable>
                 </View>

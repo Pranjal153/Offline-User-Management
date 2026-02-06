@@ -93,6 +93,7 @@ const AddUserScreen = () => {
       <View style={styles.field}>
         <Text style={styles.label}>First Name</Text>
         <TextInput
+          testID="firstNameInput"
           style={styles.input}
           value={firstName}
           onChangeText={setFirstName}
@@ -102,6 +103,7 @@ const AddUserScreen = () => {
       <View style={styles.field}>
         <Text style={styles.label}>Last Name</Text>
         <TextInput
+          testID="lastNameInput"
           style={styles.input}
           value={lastName}
           onChangeText={setLastName}
@@ -112,6 +114,7 @@ const AddUserScreen = () => {
         <Text style={styles.label}>Email</Text>
         <TextInput
           style={styles.input}
+          testID="emailInput"
           keyboardType="email-address"
           autoCapitalize="none"
           value={email}
@@ -138,7 +141,11 @@ const AddUserScreen = () => {
         </View>
       </View>
 
-      <Pressable style={styles.button} onPress={handleCreateUser}>
+      <Pressable
+        testID="submitButton"
+        style={styles.button}
+        onPress={handleCreateUser}
+      >
         <Text style={styles.buttonText}>
           {isEdit ? 'Update' : 'Create'} User
         </Text>
