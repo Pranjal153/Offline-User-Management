@@ -2,9 +2,12 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
+    backgroundColor: 'green',
     paddingHorizontal: 16,
   },
+  isLoadingStyle:{
+backgroundColor:'blue'
+  }, 
   tabContainer: {
     flexDirection: 'row',
     backgroundColor: '#F2F2F2',

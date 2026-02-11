@@ -6,6 +6,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../App';
 import { deleteUser, loadUsers, syncUsers } from '../../store/users/userThunks';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const TABS = ['All', 'Admin', 'Manager'] as const;
 type NavProp = NativeStackNavigationProp<RootStackParamList, 'UserList'>;
@@ -70,9 +71,9 @@ const UserListScreen = () => {
       isEdit: true,
     });
   };
-
+const isLoading = true
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={[styles.container, isLoading&&styles.isLoadingStyle]}>
       {search === '' && (
         <View style={styles.tabContainer}>
           {TABS.map(tab => (
@@ -152,7 +153,7 @@ const UserListScreen = () => {
       <Pressable style={styles.fabBtn} onPress={handleNavigateToAddUser}>
         <Text style={styles.plusIcon}>+</Text>
       </Pressable>
-    </View>
+    </SafeAreaView>
   );
 };
 
